@@ -237,3 +237,13 @@
 
 
 
+### Question No 6: Smart EV Charging And Parking Management System
+#### IPO Chart:
+
+
+##### PAC Chart:
+
+
+
+
+
