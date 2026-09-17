@@ -125,7 +125,7 @@
 |---|---|---|
 | Quantity `q` | Validate input values | Shopping Bill |
 | Price `p` | Calculate `Subtotal = q × p` | Quantity |
-| Discount `d` (%) | Calculate `Discount Amount = Subtotal × d / 100` | Price |
+| Discount `d` (%) | Calculate `Discount Amount = s - (s*d)/100` | Price |
 | Tax `t` (%) | Calculate amount after discount | Subtotal |
 |  | Calculate Tax Amount | Discount Amount |
 |  | Calculate Final Bill | Tax Amount |
@@ -139,9 +139,7 @@
 | **Variables** | `q, p, d, t, subtotal, discount, tax, finalBill` |
 | **Validation** | Check that quantity, price, discount and tax values are valid. |
 | **Step 1** | `subtotal = q × p` |
-| **Step 2** | `discount = subtotal × d / 100` |
-| **Step 3** | `amountAfterDiscount = subtotal − discount` |
-| **Step 4** | `tax = amountAfterDiscount × t / 100` |
-| **Step 5** | `finalBill = amountAfterDiscount + tax` |
+| **Step 2** | `discount = s - (s*d) / 100` |
+| **Step 3** | `finalBill = discount +(discount*t)/100` |
 | **Output** | Display shopping bill details. |
 | **Termination** | End program after displaying the bill. |
