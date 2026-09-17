@@ -148,21 +148,39 @@
 
 ### Question No 5: Smart Campus Parking And Access Management System
 #### IPO Chart:
-| **Input**                          | **Process**                                | **Output**                                  |
-| ---------------------------------- | ------------------------------------------ | ------------------------------------------- |
-| Number of vehicles `n`             | Initialise `A = 0`, `B = 0`, `C = 0`       | Parking summary                             |
-| Vehicle type `C/B/V`               | Check whether vehicle input is valid       | Total accepted vehicles                     |
-| Category `F/S/G`                   | Check whether category input is valid      | Total rejected vehicles                     |
-| Permit `Y/N`                       | Check permit status                        | Total vehicles processed                    |
-| Emergency `Y/N` (if permit is `Y`) | Check emergency status                     | Successfully parked cars                    |
-|                                    | Assign vehicle to appropriate parking zone | Successfully parked bikes                   |
-|                                    | Category `F` → Zone A                      | Successfully parked vans                    |
-|                                    | Category `S` → Zone C                      | Zone A occupancy                            |
-|                                    | Category `G` → Zone B                      | Zone B occupancy                            |
-|                                    | Check available capacity                   | Zone C occupancy                            |
-|                                    | Van occupies `2` spaces                    | Remaining capacity of Zone A                |
-|                                    | Car/Bike occupies `1` space                | Remaining capacity of Zone B                |
-|                                    | Increment accepted/rejected counters       | Remaining capacity of Zone C                |
-|                                    | Increment car/bike/van counters            | Zone with maximum occupancy                 |
-|                                    | Calculate total occupancy and capacity     | Whether the entire parking facility is full |
+| **INPUT**                | **PROCESS**                                    | **OUTPUT**                     |
+| ------------------------ | ---------------------------------------------- | ------------------------------ |
+| Number of vehicles `n`   | Initialise `A = 0`, `B = 0`, `C = 0`           | Total accepted vehicles        |
+| Vehicle type `C / B / V` | Initialise `accepted = 0`, `rejected = 0`      | Total rejected vehicles        |
+| Category `F / S / G`     | Initialise `cars = 0`, `bikes = 0`, `vans = 0` | Total vehicles processed       |
+| Permit `Y / N`           | Set `capA = 20`, `capB = 40`, `capC = 15`      | Cars successfully parked       |
+| Emergency `Y / N`        | Validate vehicle type, category and permit     | Bikes successfully parked      |
+|                          | Check permit status                            | Vans successfully parked       |
+|                          | Check emergency status                         | Zone A occupancy               |
+|                          | Assign vehicle to appropriate zone             | Zone B occupancy               |
+|                          | Check available parking capacity               | Zone C occupancy               |
+|                          | Category `F` → Zone A                          | Zone A remaining capacity      |
+|                          | Category `S` → Zone C                          | Zone B remaining capacity      |
+|                          | Category `G` → Zone B                          | Zone C remaining capacity      |
+|                          | Van requires 2 spaces                          | Zone with maximum occupancy    |
+|                          | Car/Bike requires 1 space                      | Total occupancy                |
+|                          | Update accepted/rejected counters              | Total parking capacity         |
+|                          | Update car/bike/van counters                   | Parking facility full/not full |
+|                          | Calculate `totalOccupancy = A + B + C`         | Parking summary                |
+
+##### PAC Chart:
+| **P — Problem**                                           | **A — Analysis**                     | **C — Conditions / Constraints**                 |
+| --------------------------------------------------------- | ------------------------------------ | ------------------------------------------------ |
+| Manage vehicles entering the campus parking facility      | Number of vehicles = `n`             | Vehicle type must be `C`, `B` or `V`             |
+| Assign each valid vehicle to the appropriate parking zone | Zone A capacity = `20`               | Category must be `F`, `S` or `G`                 |
+| Check whether parking space is available                  | Zone B capacity = `40`               | Permit must be `Y` or `N`                        |
+| Accept or reject vehicles                                 | Zone C capacity = `15`               | Emergency must be `Y` or `N`                     |
+| Maintain the number of occupied spaces                    | Car requires `1` space               | Van requires `2` spaces                          |
+| Maintain counts of cars, bikes and vans                   | Bike requires `1` space              | Car/Bike require 1 space                         |
+| Display parking information                               | Category `F` is assigned to Zone A   | Category `F` → Zone A                            |
+| Display remaining capacity                                | Category `S` is assigned to Zone C   | Category `S` → Zone C                            |
+| Display the zone with maximum occupancy                   | Category `G` is assigned to Zone B   | Category `G` → Zone B                            |
+| Check whether the entire parking facility is full         | Total capacity = `20 + 40 + 15 = 75` | Vehicle is accepted only when space is available |
+| Display final parking summary                             | Total occupancy = `A + B + C`        | If no space is available → vehicle rejected      |
+
 
