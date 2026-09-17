@@ -53,7 +53,7 @@
 
 
 
-### Question No 2:
+### Question No 2: Elevator Simulation
 #### IPO Chart:
 | **Input** | **Process** | **Output** |
 |---|---|---|
@@ -82,5 +82,39 @@
 | **Output 3** | `Print Floor Reached / Going Floor` |
 | **Loop Update** | `i = i + 1` |
 | **Termination** | Stop when `i > n`. |
+
+
+
+### Question No 3: Class Result Processing
+#### IPO Chart:
+| **Input** | **Process** | **Output** |
+|---|---|---|
+| `n` = Number of students | Set `i = 1` | **Distinction** |
+| `m1, m2, m3, m4, m5` = 5 subject marks | Calculate `Avg = (u1+u2+u3+u4+u5) / 5` | **Pass** |
+|  | Check `Avg > 80` | **Fail** |
+|  | Check `Avg ≥ 60` | **Fail due to Subject Deficiency** |
+|  | Check whether any subject mark `< 33` | **Result** |
+|  | Increment `i = i + 1` |  |
+|  | Repeat until `i > n` |  |
+
+##### PAC Chart:
+| **PAC Component** | **Details** |
+|---|---|
+| **Problem** | Calculate the average marks of each student and determine the result. |
+| **Input** | Number of students `n` |
+| **Input Data** | Five subject marks `m1, m2, m3, m4, m5` |
+| **Variables** | `n`, `i`, `m1`, `m2`, `m3`, `m4`, `m5`, `Avg` |
+| **Initialization** | `i = 1` |
+| **Calculation** | `Avg = (m1 + m2 + m3 + m4 + m5) / 5` |
+| **Condition 1** | `Avg > 80` |
+| **If Yes** | Display **Distinction** |
+| **Condition 2** | `Avg ≥ 60` |
+| **If Yes** | Display **Pass** |
+| **If No** | Display **Fail** |
+| **Condition 3** | Check whether any subject mark `< 33` |
+| **If Yes** | Display **Fail due to Subject Deficiency** |
+| **Counter Update** | `i = i + 1` |
+| **Loop Condition** | `i ≤ n` |
+| **Termination** | Stop when `i > n` |
 
 
