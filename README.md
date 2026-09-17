@@ -119,7 +119,7 @@
 
 
 
-### Question No 4: Online Shopping Bill Calculator:
+### Question No 4: Online Shopping Bill Calculator
 #### IPO Chart:
 | **Input** | **Process** | **Output** |
 |---|---|---|
@@ -143,3 +143,26 @@
 | **Step 3** | `finalBill = discount +(discount*t)/100` |
 | **Output** | Display shopping bill details. |
 | **Termination** | End program after displaying the bill. |
+
+
+
+### Question No 5: Smart Campus Parking And Access Management System
+#### IPO Chart:
+| **Input**                          | **Process**                                | **Output**                                  |
+| ---------------------------------- | ------------------------------------------ | ------------------------------------------- |
+| Number of vehicles `n`             | Initialise `A = 0`, `B = 0`, `C = 0`       | Parking summary                             |
+| Vehicle type `C/B/V`               | Check whether vehicle input is valid       | Total accepted vehicles                     |
+| Category `F/S/G`                   | Check whether category input is valid      | Total rejected vehicles                     |
+| Permit `Y/N`                       | Check permit status                        | Total vehicles processed                    |
+| Emergency `Y/N` (if permit is `Y`) | Check emergency status                     | Successfully parked cars                    |
+|                                    | Assign vehicle to appropriate parking zone | Successfully parked bikes                   |
+|                                    | Category `F` → Zone A                      | Successfully parked vans                    |
+|                                    | Category `S` → Zone C                      | Zone A occupancy                            |
+|                                    | Category `G` → Zone B                      | Zone B occupancy                            |
+|                                    | Check available capacity                   | Zone C occupancy                            |
+|                                    | Van occupies `2` spaces                    | Remaining capacity of Zone A                |
+|                                    | Car/Bike occupies `1` space                | Remaining capacity of Zone B                |
+|                                    | Increment accepted/rejected counters       | Remaining capacity of Zone C                |
+|                                    | Increment car/bike/van counters            | Zone with maximum occupancy                 |
+|                                    | Calculate total occupancy and capacity     | Whether the entire parking facility is full |
+
