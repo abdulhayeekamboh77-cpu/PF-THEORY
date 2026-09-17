@@ -118,3 +118,30 @@
 | **Termination** | Stop when `i > n` |
 
 
+
+### Question No 4: Online Shopping Bill Calculator:
+#### IPO Chart:
+| **Input** | **Process** | **Output** |
+|---|---|---|
+| Quantity `q` | Validate input values | Shopping Bill |
+| Price `p` | Calculate `Subtotal = q × p` | Quantity |
+| Discount `d` (%) | Calculate `Discount Amount = Subtotal × d / 100` | Price |
+| Tax `t` (%) | Calculate amount after discount | Subtotal |
+|  | Calculate Tax Amount | Discount Amount |
+|  | Calculate Final Bill | Tax Amount |
+|  | Store all calculated values | Final Bill |
+
+##### PAC Chart:
+| **PAC Component** | **Details** |
+|---|---|
+| **Problem** | Calculate the final shopping bill after applying discount and tax. |
+| **Inputs** | Quantity `q`, Price `p`, Discount `%` `d`, Tax `%` `t` |
+| **Variables** | `q, p, d, t, subtotal, discount, tax, finalBill` |
+| **Validation** | Check that quantity, price, discount and tax values are valid. |
+| **Step 1** | `subtotal = q × p` |
+| **Step 2** | `discount = subtotal × d / 100` |
+| **Step 3** | `amountAfterDiscount = subtotal − discount` |
+| **Step 4** | `tax = amountAfterDiscount × t / 100` |
+| **Step 5** | `finalBill = amountAfterDiscount + tax` |
+| **Output** | Display shopping bill details. |
+| **Termination** | End program after displaying the bill. |
