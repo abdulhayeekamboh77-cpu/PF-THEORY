@@ -4,28 +4,49 @@
 #### IPO Chart:
 | **Input** | **Process** | **Output** |
 |---|---|---|
-| Number of guests `N` | Initialize `Hotel Total Revenue = 0` | Final price for each guest |
-| Season (Peak / Off-Peak) | Determine base rate according to season | Discount amount, if applicable |
-| Room Type (Standard / Deluxe / Suite) | Select rate according to room type and season | Final price after discount |
-| Number of nights stayed | Calculate `Total Price = Rate × Nights` | Hotel Total Revenue |
-|  | If nights > 7, calculate 15% discount |  |
-|  | Subtract discount from total price |  |
-|  | Add guest's final price to Hotel Total Revenue |  |
-|  | Repeat processing for all N guests |  |
+| `N` = Number of guests | Set `i = 1` | Final price / total price for each guest |
+| `Season` = Peak / Off-Peak | Set `Revenue = 0` | Hotel total revenue |
+| `Room Type` = Standard / Deluxe / Suite | Set `Discount = 0.15` | |
+| `Nights` stayed | Check season | |
+|  | If **Peak**, select rate according to room type | |
+|  | Peak + Standard → `Rate = 5000` | |
+|  | Peak + Deluxe → `Rate = 8000` | |
+|  | Peak + Suite → `Rate = 12000` | |
+|  | If **Off-Peak**, select rate according to room type | |
+|  | Off-Peak + Standard → `Rate = 3000` | |
+|  | Off-Peak + Deluxe → `Rate = 5000` | |
+|  | Off-Peak + Suite → `Rate = 8000` | |
+|  | Calculate `TotalPrice = Nights × Rate` | |
+|  | If `Nights > 7`, calculate `Off = TotalPrice × 0.15` | |
+|  | Calculate `TotalPrice = TotalPrice − Off` | |
+|  | Add `TotalPrice` to `Revenue` | |
+|  | Increment `i = i + 1` | |
+|  | Repeat until all `N` guests are processed | |
+|  | Display `Revenue` | |
 
 ##### PAC Chart:
-| **Problem** | **Analysis / Decision** |
+| **Problem** | **Analysis / Logic** |
 |---|---|
-| Determine room rate | If Season = Peak, use Peak rates |
-| Peak + Standard | Rate = Rs. 5,000/night |
-| Peak + Deluxe | Rate = Rs. 8,000/night |
-| Peak + Suite | Rate = Rs. 12,000/night |
-| Off-Peak + Standard | Rate = Rs. 3,000/night |
-| Off-Peak + Deluxe | Rate = Rs. 5,000/night |
-| Off-Peak + Suite | Rate = Rs. 8,000/night |
-| Calculate room cost | `Rate × Nights` |
-| Long-stay discount | If Nights > 7 → 15% discount |
-| No long-stay discount | If Nights ≤ 7 → discount = 0 |
-| Final guest price | `Total Price − Discount` |
-| Hotel revenue | Add every guest's final price to running total |
-| Processing | Process all `N` guests |
+| Number of guests | Input `N` guests and process them one by one |
+| Initialize counter | Set `i = 1` |
+| Initialize revenue | Set `Revenue = 0` |
+| Get guest information | Input `Season`, `RoomType`, and `Nights` |
+| Determine season | Check whether `Season = Peak` |
+| Peak season | Use Peak rates |
+| Peak + Standard | `Rate = Rs. 5000/night` |
+| Peak + Deluxe | `Rate = Rs. 8000/night` |
+| Peak + Suite | `Rate = Rs. 12000/night` |
+| Off-Peak season | Use Off-Peak rates |
+| Off-Peak + Standard | `Rate = Rs. 3000/night` |
+| Off-Peak + Deluxe | `Rate = Rs. 5000/night` |
+| Off-Peak + Suite | `Rate = Rs. 8000/night` |
+| Calculate room price | `TotalPrice = Rate × Nights` |
+| Check long stay | If `Nights > 7`, apply 15% discount |
+| Long-stay discount | `DiscountAmount = TotalPrice × 0.15` |
+| Apply discount | `TotalPrice = TotalPrice − DiscountAmount` |
+| No long-stay discount | If `Nights ≤ 7`, keep original `TotalPrice` |
+| Calculate hotel revenue | `Revenue = Revenue + TotalPrice` |
+| Process next guest | `i = i + 1` |
+| Check remaining guests | If `i ≤ N`, process next guest |
+| All guests processed | Display `Revenue` |
+| End | Terminate the program |
