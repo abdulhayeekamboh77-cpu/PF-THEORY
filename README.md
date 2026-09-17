@@ -50,3 +50,37 @@
 | Check remaining guests | If `i ≤ N`, process next guest |
 | All guests processed | Display `Revenue` |
 | End | Terminate the program |
+
+
+
+##### Question No 2: Hostel Booking System
+###### IPO Chart:
+| **Input** | **Process** | **Output** |
+|---|---|---|
+| Requested Floor | Set `i = 0` as current floor | Moving Up |
+| Number of Floors `n` | Check `i ≤ n` | Moving Down |
+|  | Compare Requested Floor with Current Floor | Going Floor / Floor Reached |
+|  | If Requested Floor > Current Floor → move up |  |
+|  | If Requested Floor < Current Floor → move down |  |
+|  | If Requested Floor = Current Floor → floor reached |  |
+|  | Increment `i = i + 1` |  |
+
+####### PAC Chart:
+| **Problem Analysis** | **Details** |
+|---|---|
+| **Problem** | Determine the elevator's movement according to the requested floor and current floor. |
+| **Input** | Number of floors `n` and requested floor |
+| **Variables** | `n`, `i`, Requested Floor |
+| **Initialization** | `i = 0` |
+| **Condition 1** | `i ≤ n` |
+| **Condition 2** | Requested Floor > Current Floor |
+| **Condition 3** | Requested Floor < Current Floor |
+| **Condition 4** | Requested Floor = Current Floor |
+| **Processing** | Compare requested floor with current floor and determine elevator direction. |
+| **Output 1** | `Print Moving Up` |
+| **Output 2** | `Print Moving Down` |
+| **Output 3** | `Print Floor Reached / Going Floor` |
+| **Loop Update** | `i = i + 1` |
+| **Termination** | Stop when `i > n`. |
+
+
