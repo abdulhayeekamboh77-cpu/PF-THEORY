@@ -53,8 +53,8 @@
 
 
 
-###### Question No 2: Hostel Booking System
-####### IPO Chart:
+# Question No 2: Hostel Booking System
+## IPO Chart:
 | **Input** | **Process** | **Output** |
 |---|---|---|
 | Requested Floor | Set `i = 0` as current floor | Moving Up |
@@ -65,7 +65,7 @@
 |  | If Requested Floor = Current Floor → floor reached |  |
 |  | Increment `i = i + 1` |  |
 
-######## PAC Chart:
+### PAC Chart:
 | **Problem Analysis** | **Details** |
 |---|---|
 | **Problem** | Determine the elevator's movement according to the requested floor and current floor. |
