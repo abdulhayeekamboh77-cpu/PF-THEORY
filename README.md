@@ -169,18 +169,51 @@
 |                          | Calculate `totalOccupancy = A + B + C`         | Parking summary                |
 
 ##### PAC Chart:
-| **P — Problem**                                           | **A — Analysis**                     | **C — Conditions / Constraints**                 |
-| --------------------------------------------------------- | ------------------------------------ | ------------------------------------------------ |
-| Manage vehicles entering the campus parking facility      | Number of vehicles = `n`             | Vehicle type must be `C`, `B` or `V`             |
-| Assign each valid vehicle to the appropriate parking zone | Zone A capacity = `20`               | Category must be `F`, `S` or `G`                 |
-| Check whether parking space is available                  | Zone B capacity = `40`               | Permit must be `Y` or `N`                        |
-| Accept or reject vehicles                                 | Zone C capacity = `15`               | Emergency must be `Y` or `N`                     |
-| Maintain the number of occupied spaces                    | Car requires `1` space               | Van requires `2` spaces                          |
-| Maintain counts of cars, bikes and vans                   | Bike requires `1` space              | Car/Bike require 1 space                         |
-| Display parking information                               | Category `F` is assigned to Zone A   | Category `F` → Zone A                            |
-| Display remaining capacity                                | Category `S` is assigned to Zone C   | Category `S` → Zone C                            |
-| Display the zone with maximum occupancy                   | Category `G` is assigned to Zone B   | Category `G` → Zone B                            |
-| Check whether the entire parking facility is full         | Total capacity = `20 + 40 + 15 = 75` | Vehicle is accepted only when space is available |
-| Display final parking summary                             | Total occupancy = `A + B + C`        | If no space is available → vehicle rejected      |
+| **P — Problem**                                            | **A — Analysis**                                                         | **C — Conditions / Calculations**                                                               |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| Process the vehicles entering the campus parking facility. | The program takes the total number of vehicles `n` as input.             | `For i = 1 to n`                                                                                |
+| Validate the information entered for each vehicle.         | Vehicle type is entered as `C / B / V`.                                  | Vehicle type must be `C`, `B`, or `V`.                                                          |
+| Check the vehicle category.                                | Category is entered as `F / S / G`.                                      | Category must be `F`, `S`, or `G`.                                                              |
+| Check the permit status of the vehicle.                    | Permit is entered as `Y / N`.                                            | Permit must be `Y` or `N`.                                                                      |
+| Check the emergency status when required.                  | Emergency status is entered as `Y / N`.                                  | Emergency must be `Y` or `N`.                                                                   |
+| Handle invalid input.                                      | If the entered information is invalid, the input is entered again.       | Display: **"Invalid Input. Please re-enter."**                                                  |
+| Check whether the vehicle has a valid permit.              | If `permit = Y`, the emergency status is checked.                        | If `permit = N`, the vehicle is rejected.                                                       |
+| Check emergency status.                                    | If the permit is valid, emergency information is entered.                | If `emergency = Y`, the vehicle proceeds for allocation.                                        |
+| Reject a vehicle when it cannot be assigned.               | The vehicle is marked as not assigned.                                   | `assigned = False`                                                                              |
+| Assign vehicles to the appropriate parking zone.           | Vehicles are assigned according to their category.                       | `F → Zone A`, `S → Zone C`, `G → Zone B`                                                        |
+| Allocate a Category F vehicle.                             | Category `F` vehicles are checked for Zone A.                            | Van: `A + 2 <= capA`; Other vehicle: `A + 1 <= capA`                                            |
+| Allocate a Category S vehicle.                             | Category `S` vehicles are checked for Zone C.                            | Van: `C + 2 <= capC`; Other vehicle: `C + 1 <= capC`                                            |
+| Allocate a Category G vehicle.                             | Category `G` vehicles are checked for Zone B.                            | Van: `B + 2 <= capB`; Other vehicle: `B + 1 <= capB`                                            |
+| Check the available space in Zone A.                       | The current occupancy of Zone A is compared with its capacity.           | `capA = 20`                                                                                     |
+| Check the available space in Zone B.                       | The current occupancy of Zone B is compared with its capacity.           | `capB = 40`                                                                                     |
+| Check the available space in Zone C.                       | The current occupancy of Zone C is compared with its capacity.           | `capC = 15`                                                                                     |
+| Update Zone A occupancy.                                   | If space is available, the vehicle is assigned to Zone A.                | `A = A + 1` or `A = A + 2`                                                                      |
+| Update Zone B occupancy.                                   | If space is available, the vehicle is assigned to Zone B.                | `B = B + 1` or `B = B + 2`                                                                      |
+| Update Zone C occupancy.                                   | If space is available, the vehicle is assigned to Zone C.                | `C = C + 1` or `C = C + 2`                                                                      |
+| Mark the vehicle as successfully assigned.                 | After successful allocation, the assigned status is changed.             | `assigned = True`                                                                               |
+| Store the reason when space is unavailable.                | If the required space is not available, a rejection reason is stored.    | `reason = "no available space"`                                                                 |
+| Store the reason for Zone B.                               | If Zone B has no available space, the reason is specified.               | `reason = "no available space in zone B"`                                                       |
+| Store the reason for Zone C.                               | If Zone C has no available space, the reason is specified.               | `reason = "no available space in zone C"`                                                       |
+| Count accepted vehicles.                                   | When a vehicle is successfully assigned, the accepted count increases.   | `accepted = accepted + 1`                                                                       |
+| Count rejected vehicles.                                   | When a vehicle is not assigned, the rejected count increases.            | `rejected = rejected + 1`                                                                       |
+| Count successfully parked cars.                            | If the assigned vehicle is a car, the car count increases.               | `cars = cars + 1`                                                                               |
+| Count successfully parked bikes.                           | If the assigned vehicle is a bike, the bike count increases.             | `bikes = bikes + 1`                                                                             |
+| Count successfully parked vans.                            | If the assigned vehicle is a van, the van count increases.               | `vans = vans + 1`                                                                               |
+| Display the assigned parking zone.                         | After successful allocation, the assigned zone is displayed.             | Display **"Vehicle assigned to Zone A/B/C"**                                                    |
+| Display remaining capacity of Zone A.                      | Remaining capacity is calculated by subtracting occupancy from capacity. | `capA - A`                                                                                      |
+| Display remaining capacity of Zone B.                      | Remaining capacity is calculated by subtracting occupancy from capacity. | `capB - B`                                                                                      |
+| Display remaining capacity of Zone C.                      | Remaining capacity is calculated by subtracting occupancy from capacity. | `capC - C`                                                                                      |
+| Display rejected vehicle information.                      | If the vehicle is not assigned, its rejection reason is displayed.       | Display **"Vehicle rejected: reason"**                                                          |
+| Calculate total parking occupancy.                         | The occupancy of all three zones is added.                               | `totalOccupancy = A + B + C`                                                                    |
+| Calculate total parking capacity.                          | The capacities of all three zones are added.                             | `totalCapacity = capA + capB + capC`                                                            |
+| Display the parking summary.                               | The program displays the overall parking information.                    | Accepted, rejected, processed, cars, bikes and vans                                             |
+| Display Zone A information.                                | Zone A occupancy and remaining capacity are displayed.                   | `A`, `capA - A`                                                                                 |
+| Display Zone B information.                                | Zone B occupancy and remaining capacity are displayed.                   | `B`, `capB - B`                                                                                 |
+| Display Zone C information.                                | Zone C occupancy and remaining capacity are displayed.                   | `C`, `capC - C`                                                                                 |
+| Find the zone with maximum occupancy.                      | The occupancy of Zones A, B and C is compared.                           | Compare `A`, `B` and `C`                                                                        |
+| Handle equal maximum occupancy.                            | If the maximum occupancy is equal between zones, a tie is displayed.     | **"There is a tie for Max Occupancy"**                                                          |
+| Check whether the entire parking facility is full.         | Total occupancy is compared with total capacity.                         | If `totalOccupancy = totalCapacity`                                                             |
+| Display the final parking status.                          | The program displays whether the entire facility is full or not.         | **"Entire Campus Parking Facility is Full"** / **"Entire Campus Parking Facility is Not Full"** |
+
 
 
