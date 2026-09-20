@@ -2,7 +2,7 @@
 ## PAC Chart
 | Given Data | Processing Required | Required Result |
 | ---------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
-| Number of guests `N` | Set the loop to process `N` guests. | All guests processed |
+| Number of guests `n` | Set the loop to process `n` guests. | All guests processed |
 | Guest number `i` | Process each guest one by one using the loop. | Current guest selected |
 | Season `Peak / Off-Peak` | Check whether the season is Peak or Off-Peak. | Applicable season determined |
 | Room type `Standard / Deluxe / Suite` | Check the selected room type and apply the corresponding room rate. | Applicable room rate |
@@ -17,5 +17,5 @@
 | Number of nights `<= 7` | No long-stay discount is applied. | Discount = Rs. 0 |
 | Base price + discount | Calculate `Total Price = (rate × nights) − discount`. | Final price for guest |
 | Guest's final price | Add the guest's final price to the running hotel revenue. | Updated Hotel Total Revenue |
-| All `N` guests | Repeat the process until all guests are processed. | All guest bookings processed |
+| All `n` guests | Repeat the process until all guests are processed. | All guest bookings processed |
 | Running Hotel Total Revenue | Display the accumulated revenue after the loop ends. | **Hotel Total Revenue** |
