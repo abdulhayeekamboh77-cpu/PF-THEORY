@@ -2,7 +2,7 @@
 ## PAC Chart
 | Given Data | Processing Required | Required Result |
 | ---------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
-| Number of vehicles `N` | Set the loop to process each vehicle one at a time. | Total vehicles to be processed |
+| Number of vehicles `n` | Set the loop to process each vehicle one at a time. | Total vehicles to be processed |
 | Vehicle type `C / B / V` | Validate vehicle type. Accept only Car, Bike or Van. | Valid vehicle type / Invalid input |
 | User category `F / S / G` | Validate category. Accept only Faculty, Student or Visitor/Guest. | Valid category / Invalid input |
 | Parking permit `Y / N` | Validate permit value. | Valid permit / Invalid input |
@@ -32,7 +32,7 @@
 | Accepted Bike | Increase successfully parked bike counter. | Updated bike count |
 | Accepted Van | Increase successfully parked van counter. | Updated van count |
 | No suitable space/zone | Reject vehicle and record the reason. | `Rejected — No Available Space / No Suitable Zone` |
-| All vehicles | Continue loop until all `N` vehicles are processed. | Complete parking processing |
+| All vehicles | Continue loop until all `n` vehicles are processed. | Complete parking processing |
 | Final occupancy of Zones A, B and C | Compare occupied spaces of all zones. | Zone with highest occupancy |
 | Zone capacities + final occupancy | Check whether all available parking spaces are occupied. | Campus parking full / Not full |
 | Final counters and zone data | Generate parking summary. | Total processed, accepted, rejected, cars, bikes, vans, occupancy and remaining capacity |
