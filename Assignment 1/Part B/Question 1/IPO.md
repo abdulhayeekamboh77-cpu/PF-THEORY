@@ -4,7 +4,7 @@
 #### IPO Chart:
 | **Input** | **Process** | **Output** |
 |---|---|---|
-| `N` = Number of guests | Set `i = 1` | Final price / total price for each guest |
+| `n` = Number of guests | Set `i = 1` | Final price / total price for each guest |
 | `Season` = Peak / Off-Peak | Set `Revenue = 0` | Hotel total revenue |
 | `Room Type` = Standard / Deluxe / Suite | Set `Discount = 0.15` | |
 | `Nights` stayed | Check season | |
@@ -21,5 +21,5 @@
 |  | Calculate `TotalPrice = TotalPrice − Off` | |
 |  | Add `TotalPrice` to `Revenue` | |
 |  | Increment `i = i + 1` | |
-|  | Repeat until all `N` guests are processed | |
+|  | Repeat until all `n` guests are processed | |
 |  | Display `Revenue` | |
