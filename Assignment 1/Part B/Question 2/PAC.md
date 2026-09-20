@@ -3,7 +3,7 @@
 | Given Data | Processing Required | Required Result |
 | ---------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
 | Current floor `0` | Initialise `currentFloor = 0`. | Elevator starts at Floor 0 |
-| Number of requests `N` | Set loop to process `n` floor requests. | All floor requests processed |
+| Number of requests `n` | Set loop to process `n` floor requests. | All floor requests processed |
 | Requested floor | Compare requested floor with `currentFloor`. | Direction determined |
 | Requested floor `> currentFloor` | Display `Moving Up`. | `Moving Up` |
 | Requested floor `< currentFloor` | Display `Moving Down`. | `Moving Down` |
