@@ -1,6 +1,6 @@
 # Smart EV Charging and Parking Management System
 ## PAC Chart
-| Input / Given Data | Processing Required | Required Result / Output |
+| Given Data | Processing Required | Required Result |
 | ---------------------------- | --------------------------------------------------------------------- | ------------------------------------- |
 | Vehicle type `E / H` | Check whether the vehicle is fully electric or hybrid | Vehicle type and charging eligibility |
 | Battery charge level `SOC %` | Store and compare current battery level with required charging level | Current battery percentage |
