@@ -6,6 +6,6 @@
 
 **Section:** BSAI-1A
 
-**Part:** A
+**Part:** A - Foundational Practice Problems
 
 **Question 4:** Print the multiplication tables from 1 to 10, but skip the table of any number that is multiple of 3.
