@@ -1,4 +1,7 @@
-
+/*Programmer: Abdul Hayee Kamboh
+Program: Amicable Pairs
+Roll No: 26K-0026
+Section: BSAI-1A*/
 #include <stdio.h>
 
 // Function to calculate and return the sum of the proper divisors of a number
