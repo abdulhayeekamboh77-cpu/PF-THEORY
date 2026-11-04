@@ -1,0 +1,153 @@
+/*Programmer: Abdul Hayee Kamboh
+Program: Greenhouse Temperature Monitoring System
+Roll No: 26K-0026
+Section: BSAI-1A*/
+#include <stdio.h>
+
+void init(float grid[][100], int r, int c);
+void display(float grid[][100], int r, int c);
+float analysis(float row[], int c, int sensor_number);
+int max_avg(float avgs[], int r);
+
+int main()
+{
+    float grid[20][100];
+    float avgs[20];
+    int r, c, k = 0, best;
+
+    printf("Enter number of sensors: ");
+    scanf("%d", &r);
+    printf("Enter number of hourly readings: ");
+    scanf("%d", &c);
+
+    if (r < 1 || r > 20 || c < 1 || c > 100)
+    {
+        printf("Invalid input.\n");
+        return 1;
+    }
+
+    init(grid, r, c);
+    display(grid, r, c);
+    printf("\n");
+
+    while (k < r)
+    {
+        avgs[k] = analysis(grid[k], c, k + 1);
+        k++;
+    }
+
+    best = max_avg(avgs, r);
+    printf("\n===== Final Report =====\n");
+    printf("Highest average: Sensor %d (%.2f)\n", best, avgs[best - 1]);
+
+    return 0;
+}
+
+void init(float grid[][100], int r, int c)
+{
+    int row = 0, col;
+    while (row < r)
+    {
+        printf("\nFOR SENSOR %d\n", row + 1);
+        col = 0;
+        while (col < c)
+        {
+            printf("Enter temperature reading for hour %d: ", col + 1);
+            scanf("%f", &grid[row][col]);
+            col++;
+        }
+        row++;
+    }
+}
+
+void display(float grid[][100], int r, int c)
+{
+    int row = 0, col;
+    while (row < r)
+    {
+        printf("\nSensor %d:", row + 1);
+        col = 0;
+        while (col < c)
+        {
+            printf(" %.2f", grid[row][col]);
+            col++;
+        }
+        row++;
+    }
+}
+
+/* analyzes one sensor, prints its report, returns its average */
+float analysis(float row[], int c, int sensor_number)
+{
+    int i;
+    float sum = 0, avg, high, low;
+    int critical = 0, warning = 0;
+    int start = -1;      /* index where current hot run began (-1 = no run) */
+    int longest = 0;
+
+    /* total */
+    for (i = 0; i < c; i++)
+        sum += row[i];
+    avg = sum / c;
+
+    /* highest */
+    high = row[0];
+    for (i = 1; i < c; i++)
+        if (row[i] > high)
+            high = row[i];
+
+    /* lowest */
+    low = row[0];
+    for (i = 1; i < c; i++)
+        if (row[i] < low)
+            low = row[i];
+
+    /* critical, warning and longest streak */
+    for (i = 0; i < c; i++)
+    {
+        critical += (row[i] >= 40);
+        warning += (row[i] >= 35 && row[i] < 40);
+
+        if (row[i] >= 35)
+        {
+            if (start == -1)
+                start = i;
+            if (i - start + 1 > longest)
+                longest = i - start + 1;
+        }
+        else
+        {
+            start = -1;
+        }
+    }
+
+    printf("\n\n===== Report for Sensor %d =====\n", sensor_number);
+    printf("Total    : %.2f\n", sum);
+    printf("Average  : %.2f\n", avg);
+    printf("Highest  : %.2f\n", high);
+    printf("Lowest   : %.2f\n", low);
+    printf("Critical : %d\n", critical);
+    printf("Warning  : %d\n", warning);
+    printf("Longest streak >= 35 : %d hour(s)\n", longest);
+
+    return avg;
+}
+
+/* returns the sensor number (1-based) with the highest average */
+int max_avg(float avgs[], int r)
+{
+    int i = 0;
+    float top = avgs[0];
+
+    /* first find the biggest average value */
+    for (i = 1; i < r; i++)
+        if (avgs[i] > top)
+            top = avgs[i];
+
+    /* then find which sensor has it */
+    i = 0;
+    while (avgs[i] != top)
+        i++;
+
+    return i + 1;
+}
