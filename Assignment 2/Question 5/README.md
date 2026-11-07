@@ -1,6 +1,6 @@
 # Assignment 2
 
-**Name:** Abdul Hayee Kamboh
+**Name:** Abdul Hayee
 
 **ID:** 26K-0026
 
