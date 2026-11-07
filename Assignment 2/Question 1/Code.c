@@ -1,5 +1,5 @@
-/* Program: Cinema Hall Seat Booking Management System
-Programmer: Abdul Hayee Kamboh
+/* Programmer: Abdul Hayee Kamboh 
+Program: Cinema Hall Seat Booking Management System
 Roll No: 26K-0026
 Section: BSAI-1A */
 #include <stdio.h>
