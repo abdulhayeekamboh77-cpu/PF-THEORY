@@ -3,6 +3,11 @@ Program: Bakery Festival Sales Management System
 Roll No: 26K-0026
 Section: BSAI-1A*/
 
+/*Programmer: Abdul Hayee Kamboh
+Program: Bakery Festival Sales Management System
+Roll No: 26K-0026
+Section: BSAI-1A*/
+
 #include <stdio.h>
 
 // ==========================================
@@ -67,10 +72,9 @@ float calculateDailySales(int dayNumber)
     average = total / orders;          
 
     // Print summary statistics for the completed day
-    printf("\nDay %d Summary:\n", dayNumber);
-    printf("Total sales   : Rs. %.2f\n", total);
-    printf("Average order : Rs. %.2f\n", average);
-    printf("Highest order : Rs. %.2f\n", highest);
+    printf("\nTotal sales: Rs. %.2f\n", total);
+    printf("Average order: Rs. %.2f\n", average);
+    printf("Highest order: Rs. %.2f\n", highest);
 
     return total;
 }
@@ -82,7 +86,7 @@ float calculateDailySales(int dayNumber)
 // ==========================================
 int findHighestSalesDay(float dailySales[], int numberOfDays)
 {
-    int i, bestDay = 0;                /* Assume the first day has the max sales initially */
+    int i, bestDay = 0;                    /* Assume the first day has the max sales initially */
 
     // Loop through all recorded festival days
     for (i = 1; i < numberOfDays; i++)
@@ -92,7 +96,7 @@ int findHighestSalesDay(float dailySales[], int numberOfDays)
             bestDay = i;
     }
 
-    return bestDay + 1;                /* Convert 0-based array index back to 1-based day number */
+    return bestDay + 1;                    /* Convert 0-based array index back to 1-based day number */
 }
 
 // ==========================================
@@ -105,7 +109,7 @@ void displayBarChart(float dailySales[], int numberOfDays)
     int i, j, stars;
 
     // Print header for the bar chart section
-    printf("\n===== Daily Sales Bar Chart (* = Rs. 100) =====\n");
+    printf("\n===== DAILY SALES BAR CHART =====\n");
 
     // Loop through each day to calculate and print its corresponding stars
     for (i = 0; i < numberOfDays; i++)
@@ -119,7 +123,7 @@ void displayBarChart(float dailySales[], int numberOfDays)
         for (j = 0; j < stars; j++)
             printf("*");
             
-        printf("\n");
+        printf(" (Rs. %.2f)\n", dailySales[i]);
     }
 }
 
@@ -130,8 +134,8 @@ void displayBarChart(float dailySales[], int numberOfDays)
 // ==========================================
 int main()
 {
-    float dailySales[7];               /* Array to store total sales for each festival day */
-    float festivalTotal = 0;           /* Accumulator for total festival revenue */
+    float dailySales[7];                    /* Array to store total sales for each festival day */
+    float festivalTotal = 0;            /* Accumulator for total festival revenue */
     int days, i, bestDay;
 
     // Step 1: Input and validate total festival duration
@@ -148,9 +152,10 @@ int main()
     bestDay = findHighestSalesDay(dailySales, days);
 
     // Step 4: Display the comprehensive festival summary report
-    printf("\n===== Festival Sales Summary =====\n");
-    printf("Total sales of festival : Rs. %.2f\n", festivalTotal);
-    printf("Day with highest sales  : Day %d (Rs. %.2f)\n", bestDay, dailySales[bestDay - 1]);
+    printf("\n===== FESTIVAL SUMMARY =====\n");
+    printf("Total festival sales: Rs. %.2f\n", festivalTotal);
+    printf("Day with highest sales: Day %d\n", bestDay);
+    printf("Highest daily sales: Rs. %.2f\n", dailySales[bestDay - 1]);
 
     // Step 5: Render visual bar chart for analytical overview
     displayBarChart(dailySales, days);
