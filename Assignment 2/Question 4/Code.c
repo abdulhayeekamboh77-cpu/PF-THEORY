@@ -2,14 +2,6 @@
 Program: Bakery Festival Sales Management System
 Roll No: 26K-0026
 Section: BSAI-1A*/
-/*
-Program: Bakery Festival Sales Management System
-Programmer: Abdul Hayee Kamboh
-Roll No: 26K-0026
-Section: BSAI-1A
-Course: Programming Fundamentals
-Instructor: Sir Syed Farooq Zaidi
-*/
 
 #include <stdio.h>
 
