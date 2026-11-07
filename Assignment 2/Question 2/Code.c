@@ -2,11 +2,14 @@
 Program: Amicable Pairs
 Roll No: 26K-0026
 Section: BSAI-1A*/
+
 #include <stdio.h>
 
-// Function to calculate and return the sum of the proper divisors of a number
+// ---------- FUNCTION TO CALCULATE PROPER DIVISORS ----------
+// Calculates and returns the sum of all proper divisors of a number
 int sumOfProperDivisors(int num) {
     int sum = 0;
+    
     // Proper divisors are all divisors except the number itself, 
     // so we only check up to num / 2
     for (int i = 1; i <= num / 2; i++) {
@@ -21,12 +24,13 @@ int main() {
     int n;
     int pair_count = 0;
 
-    // Input the upper limit n
+    // ---------- 1. INPUT THE UPPER LIMIT ----------
     printf("Enter a positive integer n: ");
     scanf("%d", &n);
 
     printf("\n--- Amicable Pairs (up to %d) ---\n", n);
 
+    // ---------- 2. SEARCH AND FIND AMICABLE PAIRS ----------
     // Loop through numbers from 1 up to n
     for (int a = 1; a <= n; a++) {
         int b = sumOfProperDivisors(a);
@@ -44,6 +48,7 @@ int main() {
         }
     }
 
+    // ---------- 3. DISPLAY FINAL RESULTS ----------
     // Display the total number of pairs found or a suitable message if none
     if (pair_count > 0) {
         printf("\nTotal amicable pairs found: %d\n", pair_count);
