@@ -5,19 +5,15 @@ Section: BSAI-1A */
 #include <stdio.h>
 int main() 
 {
-    int rows, cols;
-    // 1.INPUT SEATING PLAN DIMENSIONS
+    int rows, cols;                    // Input seating plan
     printf("Enter number of rows: ");
     scanf("%d", &rows);
     printf("Enter number of seats per row: ");
     scanf("%d", &cols);
 
-    // Declare a 2D array for the seating plan using Variable Length Arrays (VLA)
-    int seat[rows][cols];
-
-    // ---------- POPULATE INITIAL SEATING MATRIX ----------
+    int seat[rows][cols];             // Declare a 2D arry for seating plan 
     printf("\nEnter the current seating status for each seat (0 for available, 1 for booked):\n");
-    for (int i = 0; i < rows; i++) 
+    for (int i = 0; i < rows; i++)   // Initial seating matrix
     {
         for (int j = 0; j < cols; j++) 
         {
@@ -26,34 +22,32 @@ int main()
         }
     }
     
-    // 2. DISPLAY INITIAL SEATING ARRANGEMENT
-    printf("\n--- Initial Seating Arrangement ---\n");
+    printf("\n--- Initial Seating Arrangement ---\n");  // Display initial seating arrangement
     printf("    ");
     for (int j = 0; j < cols; j++) 
     {
-        printf("%d ", j); // Print column numbers starting from 0
+        printf("%d ", j);     // Print column numbers starting from 0
     }
     printf("\n");
 
     for (int i = 0; i < rows; i++) 
     {
-        printf("%d: ", i); // Print row number starting from 0
+        printf("%d: ", i);     // Print row number starting from 0
         for (int j = 0; j < cols; j++) 
         {
             if (seat[i][j] == 0) 
             {
-                printf("_ "); // '_' represents an available seat
+                printf("_ ");     // Represents an available seat
             } 
             else 
             {
-                printf("X "); // 'X' represents a booked seat
+                printf("X ");     // 'X' represents a booked seat
             }
         }
         printf("\n");
     }
     
-    // 3. SEAT AVAILABILITY REPORT
-    int total_available = 0;
+    int total_available = 0;        // Seat availability report
     printf("\n--- Seat Availability Report ---\n");
     for (int i = 0; i < rows; i++) 
     {
@@ -70,29 +64,26 @@ int main()
     }
     printf("Total available seats in the entire hall: %d\n", total_available);
     
-    // 4. GROUP BOOKING & VALIDATION
-    int k;
+    int k;      // Group booking and Validation
     while (1) 
     {
         printf("\nEnter the number of customers who want to sit together (k): ");
         scanf("%d", &k);
-        // Validate that group size is greater than 0 and does not exceed seats in a row
-        if (k > 0 && k <= cols) 
+                                    
+        if (k > 0 && k <= cols)   // Validate that group size is greater than 0 and does not exceed seats in a row
         {
             break;
         }
         printf("Invalid group size! Group size must be between 1 and %d.\n", cols);
     }
 
-    // 5. SEAT ALLOCATION RULES & SEARCH ALGORITHM
-    
-    int mid = rows / 2; // Middle row calculated using integer division
+    // Seat allocation rules and search algorithm
+    int mid = rows / 2;    // Middle row calculation using division
     int found = 0;
     int target_row = -1;
     int target_start_col = -1;
 
-    // Search rows in increasing order of distance from the middle row
-    for (int d = 0; d < rows; d++) 
+    for (int d = 0; d < rows; d++)    // Search rows in increasing order of distance from the middle row
     {
         int rows_to_check[2];
         int count_to_check = 0;
@@ -169,9 +160,7 @@ int main()
         }
     }
 
-    // ==========================================
-    // 6. CONFIRM BOOKING & 7. HANDLE UNSUCCESSFUL BOOKINGS
-    // ==========================================
+
     if (found) 
     {
         printf("\n--- Booking Successful! ---\n");
