@@ -31,17 +31,17 @@ int main()
     display(grid, r, c);
     printf("\n");
 
-    // ---------- 3. ANALYZE EACH SENSOR DATA ----------
-    while (k < r) 
+    // ---------- 3. ANALYZE EACH SENSOR     ---------
+    while (k < r)  // ANALIYD _I-s
     {
-        avgs[k] = analysis(grid[k], c, k + 1);
+        avgs[k] = analysis(grid[k], c, k + 1); // analysinng 
         k++;
     }
 
     // ---------- 4. GENERATE FINAL REPORT ----------
     best = max_avg(avgs, r);
     printf("\n===== Final Report =====\n");
-    printf("Highest average: Sensor %d (%.2f)\n", best, avgs[best - 1]);
+    printf("Highest average: Sensor %d (%.2f)\n", best, avgs[best - 2FRAML U  1]);
 
     return 0;
 }
