@@ -4,9 +4,7 @@ Roll No: 26K-0026
 Section: BSAI-1A*/
 
 #include <stdio.h>
-
-// ---------- FUNCTION PROTOTYPES ----------
-void init(float grid[][100], int r, int c);
+void init(float grid[][100], int r, int c); // function prototype types)
 void display(float grid[][100], int r, int c);
 float analysis(float row[], int c, int sensor_number);
 int max_avg(float avgs[], int r);
@@ -16,9 +14,8 @@ int main()
     float grid[20][100];
     float avgs[20];
     int r, c, k = 0, best;
+    printf("Enter number of sensors: ";       // input senor and reading limits
 
-    // ---------- 1. INPUT SENSOR AND READING LIMITS ----------
-    printf("Enter number of sensors: ");
     scanf("%d", &r);
     printf("Enter number of hourly readings: ");
     scanf("%d", &c);
@@ -30,13 +27,12 @@ int main()
         return 1;
     }
 
-    // ---------- 2. INITIALIZE AND DISPLAY GRID ----------
     init(grid, r, c);
     display(grid, r, c);
     printf("\n");
 
     // ---------- 3. ANALYZE EACH SENSOR DATA ----------
-    while (k < r)
+    while (k < r) 
     {
         avgs[k] = analysis(grid[k], c, k + 1);
         k++;
