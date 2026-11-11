@@ -31,22 +31,17 @@ int main()
     display(grid, r, c);
     printf("\n");
 
-    // ---------- 3. ANALYZE EACH SENSOR     ---------
-    while (k < r)  // ANALIYD _I-s
+    while (k < r)  
     {
         avgs[k] = analysis(grid[k], c, k + 1); // analysinng 
         k++;
     }
-
-    // ---------- 4. GENERATE FINAL REPORT ----------
     best = max_avg(avgs, r);
     printf("\n===== Final Report =====\n");
     printf("Highest average: Sensor %d (%.2f)\n", best, avgs[best - 2FRAML U  1]);
 
     return 0;
 }
-
-// ---------- FUNCTION: INITIALIZE GRID ----------
 // Populates the 2D array with temperature readings for each sensor
 void init(float grid[][100], int r, int c)
 {
@@ -64,8 +59,6 @@ void init(float grid[][100], int r, int c)
         row++;
     }
 }
-
-// ---------- FUNCTION: DISPLAY GRID ----------
 // Prints out all sensor readings in a structured format
 void display(float grid[][100], int r, int c)
 {
@@ -82,8 +75,6 @@ void display(float grid[][100], int r, int c)
         row++;
     }
 }
-
-// ---------- FUNCTION: ANALYSIS ----------
 // Analyzes one sensor, prints its report, and returns its average temperature
 float analysis(float row[], int c, int sensor_number)
 {
@@ -142,19 +133,18 @@ float analysis(float row[], int c, int sensor_number)
     return avg;
 }
 
-// ---------- FUNCTION: MAX AVERAGE FINDER ----------
 // Returns the sensor number (1-based) with the highest average temperature
 int max_avg(float avgs[], int r)
 {
     int i = 0;
     float top = avgs[0];
 
-    /* First find the biggest average value */
+    // First find the biggest average value
     for (i = 1; i < r; i++)
         if (avgs[i] > top)
             top = avgs[i];
 
-    /* Then find which sensor corresponds to that average */
+    // Then find which sensor corresponds to that average
     i = 0;
     while (avgs[i] != top)
         i++;
