@@ -4,11 +4,7 @@ Roll No: 26K-0026
 Section: BSAI-1A*/
 #include <stdio.h>
 #include <string.h>
-
-// ==========================================
-// FUNCTION 1: DISPLAY MENU
 // Prints the main interactive menu options for the library user.
-// ==========================================
 void displayMenu()
 {
     printf("\n===== University Library Menu =====\n");
@@ -20,27 +16,23 @@ void displayMenu()
     printf("6. Exit\n");
     printf("Enter your choice: ");
 }
-
-// ==========================================
-// FUNCTION 2: REGISTER MEMBER
 // Takes inputs for member name, student/faculty ID, and membership type.
 // Validates that the membership type is strictly 1 or 2.
-// ==========================================
 void registerMember(char name[], int *studentID, int *memberType)
 {
-    // Prompt and read member's full name (including spaces)
+    // Prompt and read members full name (including spaces)
     printf("\nEnter member name: ");
-    scanf(" %[^\n]", name);             /* reads name with spaces */
+    scanf(" %[^\n]", name);
 
-    // Prompt and read identification number
+    // input student id
     printf("Enter student ID: ");
     scanf("%d", studentID);
 
-    // Prompt and read membership category
+    // input membership category
     printf("Membership type (1 = Student, 2 = Faculty): ");
     scanf("%d", memberType);
 
-    /* Keep looping until a valid membership type (1 or 2) is entered */
+    // loop valid until a valid membership type (1 or 2) is entered
     while (*memberType != 1 && *memberType != 2)
     {
         printf("Invalid type! Enter 1 for Student or 2 for Faculty: ");
@@ -49,91 +41,70 @@ void registerMember(char name[], int *studentID, int *memberType)
 
     printf("Member registered successfully.\n");
 }
-
-// ==========================================
-// FUNCTION 3: DISPLAY BOOKS
-// Prints the complete inventory of books, their IDs, titles, 
-// and currently available copies in a formatted tabular structure.
-// ==========================================
+// Prints the complete inventory of books, their IDs, titles and currently available copies in a formatted tabular structure.
 void displayBooks(int bookIDs[], char bookTitles[][50], int availableCopies[], int totalBooks)
 {
     int i;
-
-    // Print table header with alignment widths
     printf("\n%-10s %-30s %s\n", "Book ID", "Title", "Available Copies");
     printf("------------------------------------------------------\n");
-
     // Loop through all inventory items and display their details
     for (i = 0; i < totalBooks; i++)
     {
         printf("%-10d %-30s %d\n", bookIDs[i], bookTitles[i], availableCopies[i]);
     }
 }
-
-// ==========================================
-// FUNCTION 4: BORROW A BOOK
-// Handles book borrowing logic, checks borrowing limits (max 3 books),
 // verifies stock availability, calculates allowed loan duration, and updates inventory.
-// ==========================================
 void borrowBook(int bookIDs[], char bookTitles[][50], int availableCopies[],
                 int totalBooks, int borrowedBookIDs[], int *borrowedCount, int memberType)
 {
     int bookID, days, i, index = -1, allowedDays;
 
-    /* Check if the user has already reached the maximum limit of 3 borrowed books */
+    // Check if the user has already reached the maximum limit of 3 borrowed books
     if (*borrowedCount >= 3)
     {
         printf("Limit reached! You can borrow only 3 books at a time.\n");
         return;
     }
-
-    // Prompt for the target book ID
+    // input target book id
     printf("Enter book ID: ");
     scanf("%d", &bookID);
-
-    /* Search for the entered book ID within the inventory array */
+    // search for entered book id
     for (i = 0; i < totalBooks; i++)
     {
         if (bookIDs[i] == bookID)
             index = i;
     }
-
     // Validate if the book ID exists
     if (index == -1)
     {
         printf("Invalid book ID!\n");
         return;
     }
-
     // Validate if physical copies are available in stock
     if (availableCopies[index] == 0)
     {
         printf("Sorry, no copies of \"%s\" are available.\n", bookTitles[index]);
         return;
     }
-
     // Prompt for desired loan duration in days
     printf("Enter number of days you want to keep the book: ");
     scanf("%d", &days);
 
-    /* Ensure that the number of days entered is positive */
+    // check the number of days entered is positive
     while (days <= 0)
     {
         printf("Days must be positive. Enter again: ");
         scanf("%d", &days);
     }
-
     // Assign allowed loan period based on membership type (Student = 14 days, Faculty = 30 days)
     if (memberType == 1)
         allowedDays = 14;
     else
         allowedDays = 30;
-
-    /* Record the borrowed book ID in user profile, increment count, and reduce stock */
+    // Record the borrowed book ID in user profile, increment count, and reduce stock 
     borrowedBookIDs[*borrowedCount] = bookID;
     (*borrowedCount)++;
     availableCopies[index]--;
-
     // Output success message and late fine warning if applicable
     printf("You borrowed \"%s\".\n", bookTitles[index]);
     printf("Allowed period is %d days.", allowedDays);
@@ -141,12 +112,7 @@ void borrowBook(int bookIDs[], char bookTitles[][50], int availableCopies[],
         printf(" Note: you want to keep it longer, so a late fine will apply after %d days.", allowedDays);
     printf("\n");
 }
-
-// ==========================================
-// FUNCTION 5: RETURN A BOOK
 // Handles book returns, restores stock, calculates overdue late fines 
-// according to membership rates, handles membership code waiver, and updates records.
-// ==========================================
 float returnBook(int bookIDs[], int availableCopies[], int totalBooks,
                  int borrowedBookIDs[], int *borrowedCount, int memberType, float *totalFine)
 {
@@ -154,19 +120,17 @@ float returnBook(int bookIDs[], int availableCopies[], int totalBooks,
     int allowedDays, ratePerDay, extraDays;
     float fine = 0, payable = 0;
     char code[20];
-
     // Check if user currently has any books checked out
     if (*borrowedCount == 0)
     {
         printf("You have no borrowed books to return.\n");
         return 0;
     }
-
     // Prompt for book ID to return
     printf("Enter book ID to return: ");
     scanf("%d", &bookID);
 
-    /* Verify that the member actually borrowed this specific book */
+    // Verify that the member actually borrowed this specific book
     for (i = 0; i < *borrowedCount; i++)
     {
         if (borrowedBookIDs[i] == bookID)
@@ -178,19 +142,18 @@ float returnBook(int bookIDs[], int availableCopies[], int totalBooks,
         printf("You have not borrowed this book!\n");
         return 0;
     }
-
     // Prompt for actual days the book was kept
     printf("Enter actual number of days the book was kept: ");
     scanf("%d", &days);
-
-    /* Validate that days kept is greater than zero */
+    
+    // Validate that days kept is greater than zero
     while (days <= 0)
     {
         printf("Days must be positive. Enter again: ");
         scanf("%d", &days);
     }
 
-    /* Locate the book in the inventory array and restore its copy count */
+    // Locate the book in the inventory array and restore its copy count
     for (i = 0; i < totalBooks; i++)
     {
         if (bookIDs[i] == bookID)
@@ -198,7 +161,7 @@ float returnBook(int bookIDs[], int availableCopies[], int totalBooks,
     }
     availableCopies[index]++;
 
-    /* Determine allowed days and daily fine rate based on membership type */
+    // Determine allowed days and daily fine rate based on membership type
     if (memberType == 1)
     {
         allowedDays = 14;
@@ -224,23 +187,23 @@ float returnBook(int bookIDs[], int availableCopies[], int totalBooks,
         // Check if correct waiver code is entered
         if (strcmp(code, "LIB2026") == 0)
         {
-            payable = fine * 0.5;        /* Apply 50% waiver discount */
+            payable = fine * 0.5;        // Apply 50% waiver discount 
             printf("Correct code! 50%% waiver applied. Fine payable = Rs. %.2f\n", payable);
         }
         else
         {
-            payable = fine;              /* No waiver applied */
+            payable = fine;              // No waiver applied
             printf("Wrong code! No waiver. Fine payable = Rs. %.2f\n", payable);
         }
 
-        *totalFine = *totalFine + fine;  /* Accumulate original fine before waiver */
+        *totalFine = *totalFine + fine;  // Accumulate original fine before waiver
     }
     else
     {
         printf("Book returned on time. No fine.\n");
     }
 
-    /* Remove the returned book ID from the borrowed list by shifting elements left */
+    // Remove the returned book ID from the borrowed list by shifting elements left
     for (i = pos; i < *borrowedCount - 1; i++)
     {
         borrowedBookIDs[i] = borrowedBookIDs[i + 1];
@@ -249,18 +212,13 @@ float returnBook(int bookIDs[], int availableCopies[], int totalBooks,
 
     return payable;
 }
-
-// ==========================================
-// FUNCTION 6: DISPLAY MEMBER RECORD
-// Outputs comprehensive details of the registered member, 
-// including active borrowed book IDs and accumulated fine summaries.
-// ==========================================
+// Outputs comprehensive details of the registered member, including active borrowed book IDs and accumulated fine summaries.
 void displayMemberRecord(char name[], int studentID, int memberType,
                          int borrowedBookIDs[], int borrowedCount,
                          float totalFine, float fineAfterWaiver)
 {
     int i;
-
+    
     // Print header and member personal details
     printf("\n===== Member Record =====\n");
     printf("Name            : %s\n", name);
@@ -289,22 +247,18 @@ void displayMemberRecord(char name[], int studentID, int memberType,
     printf("Total fine (before waiver) : Rs. %.2f\n", totalFine);
     printf("Final fine payable         : Rs. %.2f\n", fineAfterWaiver);
 }
-
-// ==========================================
-// MAIN FUNCTION
-// Controls program execution loop, initializes inventory and member states, 
-// and routes user menu selections to appropriate functions.
-// ==========================================
+                                                                        // main function
+// Controls program execution loop, initializes inventory and member states, and routes user menu selections to appropriate functions
 int main()
 {
-    /* Initialize book inventory database (4 books with pre-set stock copies) */
+    // Initialize book inventory database (4 books with pre-set stock copies)
     int bookIDs[4] = {101, 102, 103, 104};
     char bookTitles[4][50] = {"C Programming", "Data Structures",
                               "Database Systems", "Operating Systems"};
     int availableCopies[4] = {5, 3, 0, 4};
     int totalBooks = 4;
 
-    /* Initialize member profile tracking variables */
+    // Initialize member profile tracking variables
     char name[50] = "";
     int studentID = 0;
     int memberType = 0;
@@ -312,7 +266,7 @@ int main()
     int borrowedCount = 0;
     float totalFine = 0;
     float fineAfterWaiver = 0;
-    int registered = 0;          /* Status flag: 0 = unregistered, 1 = registered */
+    int registered = 0;          // Status flag: 0 = unregistered, 1 = registered
 
     int choice;
 
@@ -322,7 +276,7 @@ int main()
         displayMenu();
         scanf("%d", &choice);
 
-        // Switch-case block to route user choice
+        // Switch block to route user choice
         switch (choice)
         {
             case 1: // Register Member option
@@ -334,7 +288,7 @@ int main()
                 {
                     registerMember(name, &studentID, &memberType);
                     registered = 1;
-                    borrowedCount = 0;       /* Reset profile state for new member */
+                    borrowedCount = 0;       // Reset profile state for new member
                     totalFine = 0;
                     fineAfterWaiver = 0;
                 }
